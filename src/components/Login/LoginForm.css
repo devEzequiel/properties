@@ -1,0 +1,55 @@
+.content {
+  width: 300px;
+  min-height: 200px;
+  margin: 0px auto;
+}
+
+h1 {
+  font-size: 40px;
+  color: #067559;
+  margin-top: 3rem;
+  padding: 2px 0 10px 0;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.content p:first-child {
+  margin: 0px;
+}
+
+
+.form {
+  position: relative;
+  top: 0px;
+  width: 100%;
+  padding: 18px 6% 60px 6%;
+  margin: 0 0 35px 0;
+  background: #ffffff;
+  border: 1px solid rgba(147, 184, 189, 0.8);
+}
+
+.criar {
+  text-decoration: none;
+  color: #067559;
+  left: 0px;
+  height: 20px;
+  font-size: 16px;
+}
+
+.criar:hover {
+  color: rgb(107, 187, 160);
+}
+
+.loginError {
+  color: hsl(0, 94%, 50%);
+  font-size: 0.875rem;
+  margin-top: 0rem;
+}
+
+.success {
+  color: hsl(135, 91%, 56%);
+  font-size: 0.875rem;
+  margin-top: 0rem;
+}
