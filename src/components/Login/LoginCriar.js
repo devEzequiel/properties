@@ -15,8 +15,9 @@ const LoginCriar = () => {
   const [createError, setCreateError] = React.useState(null);
   const { loading, request } = useFetch(); 
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault();
+    //verificar se os campos estão preenchidos
     if (
       nome.validate() &&
       email.validate() &&

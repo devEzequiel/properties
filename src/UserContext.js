@@ -77,6 +77,7 @@ export const UserStorage = ({ children }) => {
         }
       } else {
         setLogin(false);
+        console.log("nao tem")
       }
     }
     autoLogin();

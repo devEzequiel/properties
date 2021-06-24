@@ -3,7 +3,7 @@ label {
   position: relative;
 }
 
-input{
+input, textarea{
   width: 100%;
   margin: 5px 0 15px 0;
   padding: 10px;
@@ -21,7 +21,9 @@ input{
 }
 
 input:focus,
-input:hover {
+input:hover,
+textarea:focus,
+textarea:hover {
     outline: none;
     border-color: #067559;
     background: white;

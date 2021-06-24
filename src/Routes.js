@@ -1,20 +1,43 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { UserStorage } from "./UserContext";
+import User from "./components/User";
 import Home from "./components/Home";
-import LoginCriar from "./components/Login/LoginCriar";
 import LoginForm from "./components/Login/LoginForm";
+import LoginCriar from "./components/Login/LoginCriar";
+import PrivateRoute from "./PrivateRoute";
+import CreateProperty from "./components/Properties/CreateProperty";
+import SavedProperties from "./components/Properties/SavedProperties";
 
-const routes = [
-    {
-    path: '/login',
-    component: LoginForm,
-    },
-    {
-    path: '/home',
-    component: Home,         
-    },
-    {
-    path: '/criar',
-    component: LoginCriar,
-    },   
-];
+const Routes = () => {
+  return (
+    <div>
+      <Router>
+        <UserStorage>
+          <Header />
+          <Switch>
+            <Redirect exact from="/" to="/home" />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/criar" component={LoginCriar} />
 
-export default routes;
+            <PrivateRoute path="/user" component={User} />
+            <PrivateRoute path="/home" component={Home} />
+            <PrivateRoute path="/imoveis/criar" component={CreateProperty} />
+            <PrivateRoute path="/imoveis/salvos" component={SavedProperties} />
+          </Switch>
+          <Footer />
+        </UserStorage>
+      </Router>
+    </div>
+  );
+};
+
+export default Routes;

@@ -32,20 +32,20 @@ export function TOKEN_VALIDATE_POST(token) {
   };
 }
 
-export function USER_GET (token) {
-    return {
-        url: API_URL + "auth/",
-        options: {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-            // "Content-Type": "application/json",
-            // "Access-Control-Allow-Origin": "*",
-            // "Access-Control-Allow-Headers": "*",
-            Accept: "application/json, text/plain",
-          }
-        },
-      };
+export function USER_GET(token) {
+  return {
+    url: API_URL + "auth/",
+    options: {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        // "Content-Type": "application/json",
+        // "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Headers": "*",
+        Accept: "application/json, text/plain",
+      },
+    },
+  };
 }
 
 export function USER_POST(body) {
@@ -73,6 +73,24 @@ export function USER_LOGOUT(token) {
         Authorization: "Bearer " + token,
         Accept: "application/json, text/plain",
       },
+    },
+  };
+}
+
+export function PROPERTY_POST(body, token) {
+  console.log(body)
+  return {
+    url: API_URL + "property/",
+    options: {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        Accept: "application/json, text/plain",
+      },
+      body: JSON.stringify(body),
     },
   };
 }

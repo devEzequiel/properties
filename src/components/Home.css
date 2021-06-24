@@ -1,0 +1,10 @@
+.home{
+    /* background-color: rgb(137, 189, 144); */
+    border: 1px solid rgb(14, 13, 13);
+    position: relative;
+    height: auto;
+    min-height: 500px;
+    margin: 0 auto;
+    width: auto;
+    max-width: 780px;
+}

@@ -6,8 +6,8 @@ import { UserContext } from "../UserContext";
 
 const Header = () => {
   const { userLogout, user, logoutRedirect } = React.useContext(UserContext);
-  // console.log(user);
-  // {data && console.log(data.profile)}
+  const [name, setName] = React.useState("");
+  // (user && setName(user.data.name.split(' ')));
   async function handleLogout() {
     userLogout();
   }
@@ -15,24 +15,30 @@ const Header = () => {
   return (
     <header className={styles.Header}>
       <nav className={`${styles.nav} container`}>
-
         <Link className={styles.logo} to={ROUTES.HOME}>
-          Home
+          Properties
         </Link>
 
         {/* se estiver logado aparece o botão de logout */}
 
-        {user ? (
-
-          <Link to={ROUTES.USER} className={styles.login}>
-            {user && user.data.name}<button onClick={() => handleLogout()}>sair</button>
-          </Link>
-
-        ) : (
-          <Link to={ROUTES.LOGIN} className={styles.login}>
-            Login
-          </Link>
-        )}
+        <div>
+          <Link  className={`${styles.links} active`} to="/imoveis/criar">Adicionar Imóvel</Link>
+          <Link  className={styles.links} to="/imoveis/salvos">Imóveis Salvos</Link>
+          {user ? (
+            <Link  className={styles.links} to={ROUTES.USER} className={styles.login}>
+              Ezequiel
+              {/* <input
+                type="button"
+                value="sair"
+                onClick={() => handleLogout()}
+              /> */}
+            </Link>
+          ) : (
+            <Link to={ROUTES.LOGIN} className={styles.login}>
+              Login
+            </Link>
+          )}
+        </div>
       </nav>
       {logoutRedirect && <Redirect to={ROUTES.LOGIN} />}
     </header>

@@ -1,19 +1,12 @@
-import { Switch, Link } from 'react-router-dom';
-import RouteWithSubRoutes from '../RouteWithSubRoutes';
+import React from "react";
+import "./Home.css";
 
-// Notice how we are passing routes here 
-const Home = ({ routes }) => {
-    const menu = [
-    {
-        path: '/home', // the url
-        name: 'Home', // name that appear in Sidebar
-    }
-    ];
-    return (
-    <div className='home'>
-    
+const Home = () => {
+  return (
+    <div className="home">
+      <h1>Imóveis</h1>
     </div>
-    );
+  );
 };
 
 export default Home;
