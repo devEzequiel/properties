@@ -6,6 +6,6 @@
         ".vscode": true,
         "package.json": true,
         "package-lock.json": true,
-        "public": true
+        "public": false
     }
 }

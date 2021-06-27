@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CreateProperty.module.css";
+import styles from "./Property.module.css";
 import Input from "../Forms/Input";
 import Textarea from "../Forms/Textarea";
 import Button from "../Forms/Button";
@@ -63,13 +63,13 @@ const CreateProperty = () => {
         <Input
           type="text"
           label="Preço do Aluguel"
-          placeholder="titulo do Imóvel"
+          placeholder="0,00"
           {...rentalPrice}
         />
         <Input
           type="text"
           label="Preço para Venda"
-          placeholder="titulo do Imóvel"
+          placeholder="0,00"
           {...salePrice}
         />
         <Textarea id="description" {...description} label="Descrição" />

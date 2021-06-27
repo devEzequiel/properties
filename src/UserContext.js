@@ -90,7 +90,6 @@ export const UserStorage = ({ children }) => {
         userLogout,
         loginError,
         user,
-        userLogout,
         error,
         loading,
         login,

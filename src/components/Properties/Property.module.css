@@ -1,0 +1,57 @@
+.newProperty {
+  max-width: 550px;
+  width: auto;
+  margin: 40px auto 0;
+}
+
+.table {
+  display: flex;
+  width: auto;
+  margin: 40px auto 0;
+}
+
+.propertyDiv thead {
+  background: rgb(35, 124, 94);
+  color: #fff;
+}
+
+.propertyDiv tbody tr:nth-child(2n) {
+  background-color: #ccc;
+}
+
+.propertyDiv tbody tr td:nth-child(1) {
+  width: 21%;
+}
+.propertyDiv tbody tr td:nth-child(2) {
+  width: 35%;
+}
+.propertyDiv tbody tr td:nth-child(3) {
+  width: 14%;
+}
+.propertyDiv tbody tr td:nth-child(4) {
+  width: 14%;
+}
+.propertyDiv tbody tr td:nth-child(5) {
+  width: 16%;
+}
+
+.propertyDiv td {
+  padding: 20px 0;
+}
+
+.propertyDiv th {
+  padding: 10px 0;
+}
+
+.tableRow {
+  /* display: block; */
+  width: 100%;
+  text-align: center;
+  margin: 40px auto;
+}
+
+.success {
+  color: hsl(135, 91%, 56%);
+  font-size: 0.875rem;
+  float: right;
+}

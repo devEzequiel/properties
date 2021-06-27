@@ -19,6 +19,12 @@ input, textarea{
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
+input {
+  height: 36px;
+}
+textarea {
+  height: 100px;
+}
 
 input:focus,
 input:hover,

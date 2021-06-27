@@ -16,6 +16,8 @@ import LoginCriar from "./components/Login/LoginCriar";
 import PrivateRoute from "./PrivateRoute";
 import CreateProperty from "./components/Properties/CreateProperty";
 import SavedProperties from "./components/Properties/SavedProperties";
+import EditProperty from "./components/Properties/EditProperty";
+import NotFound from "./components/NotFound";
 
 const Routes = () => {
   return (
@@ -27,11 +29,12 @@ const Routes = () => {
             <Redirect exact from="/" to="/home" />
             <Route path="/login" component={LoginForm} />
             <Route path="/criar" component={LoginCriar} />
-
             <PrivateRoute path="/user" component={User} />
             <PrivateRoute path="/home" component={Home} />
             <PrivateRoute path="/imoveis/criar" component={CreateProperty} />
+            <PrivateRoute path="/imoveis/:id/editar" component={EditProperty}/>
             <PrivateRoute path="/imoveis/salvos" component={SavedProperties} />
+            <Route path="*" component={NotFound} />
           </Switch>
           <Footer />
         </UserStorage>

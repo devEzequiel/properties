@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { SAVED_PROPERTIES_GET, SAVE_PROPERTY_POST } from "../../api";
+import { PROPERTIES_GET, PROPERTY_DELETE, SAVE_PROPERTY_POST } from "../../api";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import styles from "./Property.module.css";
 
-const SavedProperties = () => {
+const ListProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
@@ -25,31 +25,36 @@ const SavedProperties = () => {
   }
 
   //recuperar as propriedades ao carregar a página
-  React.useEffect(async () => {
-
-    const { url, options } = SAVED_PROPERTIES_GET(token);
-    const { json } = await request(url, options);
-    console.log(json)
-    
+  React.useEffect(() => {
+    getProperties();
   }, []);
 
   async function getProperties() {
-    
-    // console.log(response)
-    // setProperties(json.data);
+    const { url, options } = PROPERTIES_GET(token);
+    const { json } = await request(url, options);
+    setProperties(json.data);
   }
 
   // manipular o clique nos icones
   const handleClick = (id) => (event) => {
-    // if (event.target.id === "delete") deleteProperty(id);
-    if (event.target.id === "save") saveToggle(id);
+    if (event.target.id === "delete") deleteProperty(id);
+    if (event.target.id === "save") saveProperty(id);
   };
 
   //salvar um imovel na tabela de salvos do usuário
-  async function saveToggle(id) {
+  async function saveProperty(id) {
     const { url, options } = SAVE_PROPERTY_POST(id, token);
     const { response } = await request(url, options);
     if (response.ok) {
+    }
+  }
+
+  //excluir um imóvel
+  async function deleteProperty(id) {
+    const { url, options } = PROPERTY_DELETE(id, token);
+    const { response } = await request(url, options);
+    if (response.ok) {
+      getProperties();
     }
   }
 
@@ -87,14 +92,27 @@ const SavedProperties = () => {
                     <td>{getMoney(property.rental_price)}</td>
                     <td>{getMoney(property.sale_price)}</td>
                     <td>
-                      
+                      <Link to={"/imoveis/" + property.id + "/editar"}>
+                        <i
+                          className="fas fa-edit"
+                          id="edit"
+                          style={iconStyle}
+                        />
+                      </Link>{" "}
+                      |{" "}
                       <i
                         className="fas fa-save"
                         id="save"
                         style={iconStyle}
                         onClick={handleClick(property.id)}
+                      />{" "}
+                      |{" "}
+                      <i
+                        className="fas fa-trash-alt"
+                        id="delete"
+                        style={iconStyle}
+                        onClick={handleClick(property.id)}
                       />
-
                     </td>
                   </tr>
                 );
@@ -106,4 +124,4 @@ const SavedProperties = () => {
   );
 };
 
-export default SavedProperties;
+export default ListProperties;

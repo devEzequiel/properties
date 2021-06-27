@@ -13,8 +13,11 @@ const useFetch = () => {
       setError(null);
       setLoading(true);
       response = await fetch(url, options);
+      // console.log(response)
       json = await response.json();
-      if (response.ok) throw new Error(json.message);
+      // console.log(json)
+      if (!response.ok) throw new Error(json.message);
+
     } catch (err) {
       json = null;
       setError(err.message);
@@ -23,7 +26,7 @@ const useFetch = () => {
       setLoading(false);
       return { response, json };
     }
-  });
+  }, []);
 
   return {
     data,

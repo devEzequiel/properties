@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 
 const Header = () => {
   const { userLogout, user, logoutRedirect } = React.useContext(UserContext);
-  const [name, setName] = React.useState("");
+  // const [name, setName] = React.useState("");
   // (user && setName(user.data.name.split(' ')));
   async function handleLogout() {
     userLogout();
@@ -25,7 +25,7 @@ const Header = () => {
           <Link  className={`${styles.links} active`} to="/imoveis/criar">Adicionar Imóvel</Link>
           <Link  className={styles.links} to="/imoveis/salvos">Imóveis Salvos</Link>
           {user ? (
-            <Link  className={styles.links} to={ROUTES.USER} className={styles.login}>
+            <Link  className={styles.links} to={ROUTES.USER}>
               Ezequiel
               {/* <input
                 type="button"
