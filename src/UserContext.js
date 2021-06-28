@@ -4,15 +4,19 @@ import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET, USER_LOGOUT } from "./api";
 export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
+
   const [user, setUser] = React.useState(null);
   const [login, setLogin] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+
   //funcao para armazenar o erro de login
   const [loginError, setLoginError] = React.useState(null);
   const [loginRedirect, setLoginRedirect] = React.useState(false);
   const [logoutRedirect, setLogoutRedirect] = React.useState(false);
 
+
+  //função para fazer o logout
   const userLogout = React.useCallback(async function () {
     const token = window.localStorage.getItem("token");
     const { url, options } = USER_LOGOUT(token);
@@ -26,6 +30,7 @@ export const UserStorage = ({ children }) => {
     window.localStorage.removeItem("token");
   }, []);
 
+  //recupera os dados do user, através do envio do token
   async function getUser(token) {
     const { url, options } = USER_GET(token);
     const response = await fetch(url, options);
@@ -34,6 +39,7 @@ export const UserStorage = ({ children }) => {
     setLogin(true);
   }
 
+  //faz o login -_-
   async function userLogin(email, password) {
     try {
       setError(null);

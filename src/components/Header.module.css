@@ -1,22 +1,11 @@
 .header {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   padding: 0.5rem 0;
-  position: fixed;
+  position: sticky;
   width: 100%;
   z-index: 100;
   background-color: white;
   top: 0px;
-}
-
-.header:after {
-  position: absolute;
-  top: 86%;
-  margin: 0 0 0 -36%;
-  overflow: hidden;
-  width: 50%;
-  height: 1px;
-  content: '\a0';
-  background-color: rgb(0, 0, 0);
 }
 
 .nav {
@@ -31,7 +20,7 @@ ul{
 
 .logo {
   padding: 0.5rem 0;
-  font-size: 25px;
+  font-size: 32px;
   font-weight: bold;
   color: rgb(35, 124, 94);
   font-family: Helvetica;
@@ -40,7 +29,8 @@ ul{
 .login {
   color: #333;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  margin-top: auto;
 }
 
 .login::after {

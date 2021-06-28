@@ -20,7 +20,7 @@ input, textarea{
   transition: all 0.2s linear;
 }
 input {
-  height: 36px;
+  height: 40px;
 }
 textarea {
   height: 100px;

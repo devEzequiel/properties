@@ -6,6 +6,10 @@ const types = {
       /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
     message: "Insira um email válido",
   },
+  money: {
+    regex: /^\$?[\d,]+(\.\d*)?$/,
+    message: "Insira um valor válido",
+  }
 };
 
 const useForm = (type) => {

@@ -86,14 +86,14 @@ const EditProperty = () => {
           <Input
             type="text"
             label="Preço do Aluguel"
-            placeholder="0,00"
+            placeholder="0.00"
             value={rental}
             onChange={({ target }) => setRental(target.value)}
           />
           <Input
             type="text"
             label="Preço para Venda"
-            placeholder="0,00"
+            placeholder="0.00"
             value={sale}
             onChange={({ target }) => setSale(target.value)}
           />
@@ -103,15 +103,15 @@ const EditProperty = () => {
             onChange={({ target }) => setDescription(target.value)}
             label="Descrição"
           />
+          {success && <p className={styles.success}>{success}</p>}
+
+          {error && <p className={styles.success}>{error}</p>}
+
           {loading ? (
             <Button value="Carregando..." disabled />
           ) : (
             <Button value="Adicionar Imóvel" />
           )}
-
-          {success && <p className={styles.success}>{success}</p>}
-
-          {error && <p className={styles.success}>{error}</p>}
         </form>
       </div>
     )

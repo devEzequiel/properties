@@ -69,10 +69,10 @@ const SavedProperties = () => {
   // console.log(data)
   return (
     <div className="home">
-      <h2>Imovéis</h2>
+      <h2 className={styles.title}>Imovéis Salvos</h2>
       <div className={styles.propertyDiv}>
         <table className={styles.tableRow}>
-          <thead>
+          <thead className={styles.thead}>
             <tr>
               <th>Título</th>
               <th>Descrição</th>

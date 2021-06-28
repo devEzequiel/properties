@@ -6,16 +6,19 @@ import Button from "../Forms/Button";
 import useForm from "../../Hooks/useForm";
 import useFetch from "../../Hooks/useFetch";
 import { PROPERTY_POST } from "../../api";
+import { Redirect } from "react-router";
 
 //component to create a new imóvel
 const CreateProperty = () => {
+
   const title = useForm();
-  const rentalPrice = useForm();
-  const salePrice = useForm();
+  const rentalPrice = useForm("money");
+  const salePrice = useForm("money");
   const description = useForm();
   const [success, setSuccess] = React.useState(null);
   const [error, setError] = React.useState(null);
   const { loading, request } = useFetch();
+  const [isCreated, setIsCreated] = React.useState(false);
   const token = window.localStorage.getItem("token");
 
   async function handleSubmit(event) {
@@ -43,7 +46,9 @@ const CreateProperty = () => {
       const { response } = await request(url, options);
 
       if (response.ok) {
+        window.alert("Imóvel criado com sucesso!")
         setSuccess("Usuário cadastrado com sucesso.");
+        setIsCreated(true);
       } else {
         setError("Email já cadastrado");
       }
@@ -63,13 +68,13 @@ const CreateProperty = () => {
         <Input
           type="text"
           label="Preço do Aluguel"
-          placeholder="0,00"
+          placeholder="0.00"
           {...rentalPrice}
         />
         <Input
           type="text"
           label="Preço para Venda"
-          placeholder="0,00"
+          placeholder="0.00"
           {...salePrice}
         />
         <Textarea id="description" {...description} label="Descrição" />
@@ -79,6 +84,8 @@ const CreateProperty = () => {
           <Button value="Adicionar Imóvel" />
         )}
       </form>
+
+      {isCreated && <Redirect to="/home" />}
     </div>
   );
 };

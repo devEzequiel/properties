@@ -14,7 +14,8 @@ const ListProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
-  const [saved, setSaved] = useState(null);
+  const [pageNumber, setPageNumber] = useState(null);
+  // const [saved, setSaved] = useState(null);
 
   //funções para editar o formato da moeda
   function getMoney(value) {
@@ -34,13 +35,16 @@ const ListProperties = () => {
   //recuperar os imoveis e os imoveis salvos ao carregar a página
   React.useEffect(async () => {
     getProperties();
-    console.log("object");
+    // console.log("object");
   }, []);
 
   async function getProperties() {
     const { url, options } = PROPERTIES_GET(token);
     const { response, json } = await request(url, options);
     if (response.ok) {
+
+      let foo  = new Array(json.meta.last_page)
+
       setProperties(json.data);
     } else {
       setProperties(null);
@@ -62,7 +66,7 @@ const ListProperties = () => {
       const { url, options } = SAVE_PROPERTY_POST(id, token);
       const { response } = await request(url, options);
       if (!response.ok) {
-        window.alert("Imóvel já salvo")
+        window.alert("Imóvel já salvo");
       }
     }
   }
@@ -89,7 +93,7 @@ const ListProperties = () => {
   // console.log(data)
   return (
     <div className="home">
-      <h2 className={styles.title}>Imovéis</h2>
+      <h2 className={styles.title}>Imovéis Cadastrados</h2>
       <div className={styles.propertyDiv}>
         <table className={styles.tableRow}>
           <thead className={styles.thead}>
@@ -140,6 +144,17 @@ const ListProperties = () => {
           </tbody>
         </table>
       </div>
+      {properties &&
+       (<div className={styles.pagination}>
+        <a href="#">&laquo;</a>
+        
+          <Link  href="#" className={styles.active}>1</Link>
+          <Link  href="#">2</Link>
+          <Link  href="#">3</Link>
+          <Link  href="#">4</Link>
+        
+        <a href="#">&raquo;</a>
+      </div>)}
     </div>
   );
 };

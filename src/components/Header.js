@@ -5,40 +5,53 @@ import { ROUTES } from "../constants";
 import { UserContext } from "../UserContext";
 
 const Header = () => {
-  const { userLogout, user, logoutRedirect } = React.useContext(UserContext);
-  // const [name, setName] = React.useState("");
-  // (user && setName(user.data.name.split(' ')));
+  const { userLogout, user, logoutRedirect, login } = React.useContext(UserContext);
+
+  const iconStyle = {
+    fontSize: "25px",
+    margin: " 5px 5px",
+    cursor: "pointer",
+    color: "#333",
+  }
+
+  //recuperar o nome do usuário logado
+  // React.useEffect(() => {
+  //   (user && setName(user.data.name.split(' ')));
+  // }, [])
+  
   async function handleLogout() {
     userLogout();
   }
 
   return (
-    <header className={styles.Header}>
+    <header className={styles.header}>
       <nav className={`${styles.nav} container`}>
         <Link className={styles.logo} to={ROUTES.HOME}>
-          Properties
+        <i class="fas fa-building" /> Imóveis
         </Link>
 
         {/* se estiver logado aparece o botão de logout */}
 
-        <div>
+        {login ? (
+          <div>
           <Link  className={`${styles.links} active`} to="/imoveis/criar">Adicionar Imóvel</Link>
-          <Link  className={styles.links} to="/imoveis/salvos">Imóveis Salvos</Link>
-          {user ? (
-            <Link  className={styles.links} to={ROUTES.USER}>
-              Ezequiel
-              {/* <input
-                type="button"
+            <Link  className={styles.links} to="/imoveis/salvos">Imóveis Salvos</Link>
+          
+              <i class="fas fa-sign-out-alt"
                 value="sair"
                 onClick={() => handleLogout()}
-              /> */}
-            </Link>
-          ) : (
-            <Link to={ROUTES.LOGIN} className={styles.login}>
-              Login
-            </Link>
-          )}
-        </div>
+                style={iconStyle}
+              />
+
+          </div>
+            ):(
+            <div>
+              <Link to={ROUTES.LOGIN} className={styles.login}>
+                Login
+              </Link>
+            </div>
+            )}
+        
       </nav>
       {logoutRedirect && <Redirect to={ROUTES.LOGIN} />}
     </header>
