@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SAVED_PROPERTIES_GET, SAVE_PROPERTY_POST } from "../../api";
+import { SAVED_PROPERTIES_GET, UNSAVE_PROPERTY } from "../../api";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import styles from "./Property.module.css";
@@ -8,6 +8,7 @@ const SavedProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
+  const [error, setError] = useState(null);
 
   //funções para editar o formato da moeda
   function getMoney(value) {
@@ -25,31 +26,35 @@ const SavedProperties = () => {
   }
 
   //recuperar as propriedades ao carregar a página
-  React.useEffect(async () => {
-
-    const { url, options } = SAVED_PROPERTIES_GET(token);
-    const { json } = await request(url, options);
-    console.log(json)
-    
+  React.useEffect(() => {
+    getProperties();
   }, []);
 
   async function getProperties() {
-    
-    // console.log(response)
-    // setProperties(json.data);
+    const { url, options } = SAVED_PROPERTIES_GET(token);
+    const { response, json } = await request(url, options);
+    if (response.ok) {
+      setProperties(json.data);
+    } else {
+      setProperties(null);
+      setError("Nenhum imóvel salvo");
+    }
   }
+
 
   // manipular o clique nos icones
   const handleClick = (id) => (event) => {
-    // if (event.target.id === "delete") deleteProperty(id);
-    if (event.target.id === "save") saveToggle(id);
+    if (window.confirm("Deseja remover o imóvel da lista de salvos?")) {
+      if (event.target.id === "save") unsaveProperty(id);
+    }
   };
 
-  //salvar um imovel na tabela de salvos do usuário
-  async function saveToggle(id) {
-    const { url, options } = SAVE_PROPERTY_POST(id, token);
+  async function unsaveProperty(id) {
+    
+    const { url, options } = UNSAVE_PROPERTY(id, token);
     const { response } = await request(url, options);
     if (response.ok) {
+      getProperties();
     }
   }
 
@@ -58,7 +63,7 @@ const SavedProperties = () => {
     fontSize: "25px",
     margin: " 5px 5px",
     cursor: "pointer",
-    color: "rgb(35, 124, 94)",
+    color: "rgb(33, 125, 245)",
   };
 
   // console.log(data)
@@ -87,14 +92,12 @@ const SavedProperties = () => {
                     <td>{getMoney(property.rental_price)}</td>
                     <td>{getMoney(property.sale_price)}</td>
                     <td>
-                      
                       <i
                         className="fas fa-save"
                         id="save"
                         style={iconStyle}
                         onClick={handleClick(property.id)}
                       />
-
                     </td>
                   </tr>
                 );

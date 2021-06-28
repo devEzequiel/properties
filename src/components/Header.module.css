@@ -8,6 +8,17 @@
   top: 0px;
 }
 
+.header:after {
+  position: absolute;
+  top: 86%;
+  margin: 0 0 0 -36%;
+  overflow: hidden;
+  width: 50%;
+  height: 1px;
+  content: '\a0';
+  background-color: rgb(0, 0, 0);
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -49,13 +60,13 @@ ul{
   text-align: center;
   padding: 12px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 25px;
   border-radius: 4px;
 }
 
 .links:hover {
-  background-color: #ddd;
+  background-color: rgb(167, 190, 167);
   color: black;
 }
 

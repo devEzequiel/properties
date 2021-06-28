@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { PROPERTIES_GET, PROPERTY_DELETE, SAVE_PROPERTY_POST } from "../../api";
+import {
+  PROPERTIES_GET,
+  PROPERTY_DELETE,
+  SAVED_PROPERTIES_GET,
+  SAVED_PROPERTY_GET,
+  SAVE_PROPERTY_POST,
+} from "../../api";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import styles from "./Property.module.css";
@@ -8,6 +14,7 @@ const ListProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
+  const [saved, setSaved] = useState(null);
 
   //funções para editar o formato da moeda
   function getMoney(value) {
@@ -24,37 +31,50 @@ const ListProperties = () => {
     return "R$ " + value;
   }
 
-  //recuperar as propriedades ao carregar a página
-  React.useEffect(() => {
+  //recuperar os imoveis e os imoveis salvos ao carregar a página
+  React.useEffect(async () => {
     getProperties();
+    console.log("object");
   }, []);
 
   async function getProperties() {
     const { url, options } = PROPERTIES_GET(token);
-    const { json } = await request(url, options);
-    setProperties(json.data);
+    const { response, json } = await request(url, options);
+    if (response.ok) {
+      setProperties(json.data);
+    } else {
+      setProperties(null);
+    }
   }
 
   // manipular o clique nos icones
-  const handleClick = (id) => (event) => {
-    if (event.target.id === "delete") deleteProperty(id);
-    if (event.target.id === "save") saveProperty(id);
-  };
+  const handleClick = React.useCallback(
+    (id) => (event) => {
+      if (event.target.id === "delete") deleteProperty(id);
+      if (event.target.id === "save") saveProperty(id);
+    },
+    []
+  );
 
   //salvar um imovel na tabela de salvos do usuário
   async function saveProperty(id) {
-    const { url, options } = SAVE_PROPERTY_POST(id, token);
-    const { response } = await request(url, options);
-    if (response.ok) {
+    if (window.confirm("Deseja salvar essa propriedade?")) {
+      const { url, options } = SAVE_PROPERTY_POST(id, token);
+      const { response } = await request(url, options);
+      if (!response.ok) {
+        window.alert("Imóvel já salvo")
+      }
     }
   }
 
   //excluir um imóvel
   async function deleteProperty(id) {
-    const { url, options } = PROPERTY_DELETE(id, token);
-    const { response } = await request(url, options);
-    if (response.ok) {
-      getProperties();
+    if (window.confirm("Deseja apagar esse imóvel")) {
+      const { url, options } = PROPERTY_DELETE(id, token);
+      const { response } = await request(url, options);
+      if (response.ok) {
+        getProperties();
+      }
     }
   }
 
@@ -69,10 +89,10 @@ const ListProperties = () => {
   // console.log(data)
   return (
     <div className="home">
-      <h2>Imovéis</h2>
+      <h2 className={styles.title}>Imovéis</h2>
       <div className={styles.propertyDiv}>
         <table className={styles.tableRow}>
-          <thead>
+          <thead className={styles.thead}>
             <tr>
               <th>Título</th>
               <th>Descrição</th>

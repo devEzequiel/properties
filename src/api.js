@@ -157,9 +157,19 @@ export function SAVED_PROPERTIES_GET(token) {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
+        Accept: "application/json, text/plain",
+      },
+    },
+  };
+}
+
+export function SAVED_PROPERTY_GET(token, id) {
+  return {
+    url: API_URL + "saved/" + id,
+    options: {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
         Accept: "application/json, text/plain",
       },
     },
@@ -181,3 +191,20 @@ export function SAVE_PROPERTY_POST(id, token) {
     },
   };
 }
+
+export function UNSAVE_PROPERTY(id, token) {
+  return {
+    url: API_URL + "saved/" + id,
+    options: {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        Accept: "application/json, text/plain",
+      },
+    },
+  };
+}
+

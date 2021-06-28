@@ -13,7 +13,7 @@ const useFetch = () => {
       setError(null);
       setLoading(true);
       response = await fetch(url, options);
-      // console.log(response)
+      console.log(response)
       json = await response.json();
       // console.log(json)
       if (!response.ok) throw new Error(json.message);

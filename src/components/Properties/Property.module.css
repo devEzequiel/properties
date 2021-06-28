@@ -10,13 +10,14 @@
   margin: 40px auto 0;
 }
 
-.propertyDiv thead {
+.thead {
   background: rgb(35, 124, 94);
   color: #fff;
 }
 
 .propertyDiv tbody tr:nth-child(2n) {
   background-color: #ccc;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .propertyDiv tbody tr td:nth-child(1) {
@@ -54,4 +55,8 @@
   color: hsl(135, 91%, 56%);
   font-size: 0.875rem;
   float: right;
+}
+
+.title {
+  margin: 40px;
 }
