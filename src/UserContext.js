@@ -1,5 +1,5 @@
 import React from "react";
-import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET, USER_LOGOUT } from "./api";
+import { TOKEN_POST, TOKEN_VALIDATE_POST, USER_GET } from "./api";
 
 export const UserContext = React.createContext();
 
@@ -18,7 +18,7 @@ export const UserStorage = ({ children }) => {
 
   //função para fazer o logout
   const userLogout = React.useCallback(async function () {
-    const token = window.localStorage.removeItem("token");
+    // const token = window.localStorage.removeItem("token");
     // await fetch(url, options);
     // window.localStorage.removeItem("token");
     setUser(null);

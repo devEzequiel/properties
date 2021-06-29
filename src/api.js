@@ -91,9 +91,9 @@ export function PROPERTY_POST(body, token) {
   };
 }
 
-export function PROPERTIES_GET(token) {
+export function PROPERTIES_GET(token, page) {
   return {
-    url: API_URL + "property/",
+    url: API_URL + "property?page=" + page,
     options: {
       method: "GET",
       headers: {

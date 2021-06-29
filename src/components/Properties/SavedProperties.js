@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { SAVED_PROPERTIES_GET, UNSAVE_PROPERTY } from "../../api";
-import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import styles from "./Property.module.css";
 
@@ -8,7 +7,6 @@ const SavedProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
-  const [error, setError] = useState(null);
 
   //funções para editar o formato da moeda
   function getMoney(value) {
@@ -37,7 +35,6 @@ const SavedProperties = () => {
       setProperties(json.data);
     } else {
       setProperties(null);
-      setError("Nenhum imóvel salvo");
     }
   }
 

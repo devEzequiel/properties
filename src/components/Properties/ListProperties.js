@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  PROPERTIES_GET,
-  PROPERTY_DELETE,
-  SAVED_PROPERTIES_GET,
-  SAVED_PROPERTY_GET,
-  SAVE_PROPERTY_POST,
-} from "../../api";
+import Pagination from "react-js-pagination";
+import { PROPERTIES_GET, PROPERTY_DELETE, SAVE_PROPERTY_POST } from "../../api";
 import { Link } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import styles from "./Property.module.css";
@@ -14,8 +9,9 @@ const ListProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  
+  const [activePage, setActivePage] = useState(null);
+  const [totalProperties, setTotalProperties] = useState(null);
+
   // const [saved, setSaved] = useState(null);
 
   //funções para editar o formato da moeda
@@ -34,18 +30,18 @@ const ListProperties = () => {
   }
 
   //recuperar os imoveis e os imoveis salvos ao carregar a página
-  React.useEffect(async () => {
-    getProperties();
-    // let url = window.location.pathname;
+  React.useEffect(() => {
+    getProperties(1);
+
   }, []);
 
-  async function getProperties() {
-    const { url, options } = PROPERTIES_GET(token);
+  async function getProperties(pageNumber) {
+    const { url, options } = PROPERTIES_GET(token, pageNumber);
     const { response, json } = await request(url, options);
-    if (response.ok) {
-
+    if (response.ok && json.data) {
       // let foo  = new Array(json.meta.last_page)
-      console.table(json)
+      setActivePage(json.meta.current_page);
+      setTotalProperties(json.meta.total);
 
       json.data && setProperties(json.data);
     } else {
@@ -84,6 +80,11 @@ const ListProperties = () => {
     }
   }
 
+  function handlePageChange(pageNumber) {
+    getProperties(pageNumber);
+    setActivePage(pageNumber);
+  }
+
   //estilização dos icons
   const iconStyle = {
     fontSize: "25px",
@@ -92,7 +93,6 @@ const ListProperties = () => {
     color: "rgb(35, 124, 94)",
   };
 
-  // console.log(data)
   return (
     <div className="home">
       <h2 className={styles.title}>Imovéis Cadastrados</h2>
@@ -114,7 +114,9 @@ const ListProperties = () => {
                 return (
                   <tr key={i}>
                     <td>{property.title} </td>
-                    <td className={styles.description}>{property.description}</td>
+                    <td className={styles.description}>
+                      {property.description}
+                    </td>
                     <td>{getMoney(property.rental_price)}</td>
                     <td>{getMoney(property.sale_price)}</td>
                     <td>
@@ -149,17 +151,15 @@ const ListProperties = () => {
           </tbody>
         </table>
       </div>
-      {properties &&
-       (<div className={styles.pagination}>
-        <a href="#">&laquo;</a>
-        
-          <Link  to="#" className={styles.active}>1</Link>
-          <Link  to="#">2</Link>
-          <Link  to="#">3</Link>
-          <Link  to="#">4</Link>
-        
-        <a href="#">&raquo;</a>
-      </div>)}
+      {properties && <div className={styles.pagination}>
+        <Pagination
+          activePage={activePage}
+          itemsCountPerPage={5}
+          totalItemsCount={totalProperties}
+          onChange={handlePageChange}
+          activeLinkClass={styles.active}
+        />
+      </div>}
     </div>
   );
 };

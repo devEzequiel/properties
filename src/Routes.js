@@ -8,7 +8,7 @@ import {
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { UserStorage, UserContext } from "./UserContext";
+import { UserStorage } from "./UserContext";
 import User from "./components/User";
 import Home from "./components/Home";
 import LoginForm from "./components/Login/LoginForm";
@@ -19,7 +19,6 @@ import SavedProperties from "./components/Properties/SavedProperties";
 import EditProperty from "./components/Properties/EditProperty";
 import NotFound from "./components/NotFound";
 import PublicRoute from "./PublicRoute";
-import Logout from "./components/Login/Logout";
 
 const Routes = () => {
 

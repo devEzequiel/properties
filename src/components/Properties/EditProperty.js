@@ -34,13 +34,11 @@ const EditProperty = () => {
     id = getId();
     const { url, options } = PROPERTY_GET(id, token);
     const { json } = await request(url, options);
-    // console.log(response);
-    // setProperty();
+    
     setTitle(json.data.title);
     setDescription(json.data.description);
     setRental(json.data.rental_price);
     setSale(json.data.sale_price);
-    // console.log(json.data.title);
   }
 
   async function handleSubmit(event) {

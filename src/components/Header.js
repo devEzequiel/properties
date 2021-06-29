@@ -5,13 +5,8 @@ import { ROUTES } from "../constants";
 import { UserContext } from "../UserContext";
 
 const Header = () => {
-  const { userLogout, user, logoutRedirect, login } = React.useContext(UserContext);
+  const { userLogout, logoutRedirect, login } = React.useContext(UserContext);
 
-  //recuperar o nome do usuário logado
-  // React.useEffect(() => {
-  //   (user && setName(user.data.name.split(' ')));
-  // }, [])
-  
   async function handleLogout() {
     userLogout();
   }
@@ -20,7 +15,7 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={`${styles.nav} container`}>
         <Link className={styles.logo} to={ROUTES.HOME}>
-        <i class="fas fa-building" /> Imóveis
+        <i className="fas fa-building" /> Imóveis
         </Link>
 
         {/* se estiver logado aparece o botão de logout */}

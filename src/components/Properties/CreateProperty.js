@@ -15,7 +15,6 @@ const CreateProperty = () => {
   const rentalPrice = useForm("money");
   const salePrice = useForm("money");
   const description = useForm();
-  const [success, setSuccess] = React.useState(null);
   const [error, setError] = React.useState(null);
   const { loading, request } = useFetch();
   const [isCreated, setIsCreated] = React.useState(false);
@@ -40,14 +39,12 @@ const CreateProperty = () => {
         token
       );
 
-      setSuccess(null);
       setError(null);
 
       const { response } = await request(url, options);
 
       if (response.ok) {
         window.alert("Imóvel criado com sucesso!")
-        setSuccess("Imóvel cadastrado com sucesso.");
         setIsCreated(true);
       } else {
         setError("Dados Inválidos");
@@ -78,6 +75,10 @@ const CreateProperty = () => {
           {...salePrice}
         />
         <Textarea id="description" {...description} label="Descrição" />
+
+        {error && <p className={styles.error}>Dados Inválidos</p>}
+
+        
         {loading ? (
           <Button value="Carregando..." style={{cursor: "wait"}} disabled />
         ) : (
