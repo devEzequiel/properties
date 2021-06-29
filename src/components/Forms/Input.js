@@ -24,7 +24,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
-        autoComplete="off"
+        autoComplete="on"
       />
       {error && <p className={styles.error}>{error}</p>}
     </div>

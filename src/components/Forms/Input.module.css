@@ -18,6 +18,8 @@ input, textarea{
 
   -webkit-transition: all 0.2s linear;
   transition: all 0.2s linear;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
 }
 input {
   height: 40px;

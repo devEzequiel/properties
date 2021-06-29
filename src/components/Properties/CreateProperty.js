@@ -47,10 +47,10 @@ const CreateProperty = () => {
 
       if (response.ok) {
         window.alert("Imóvel criado com sucesso!")
-        setSuccess("Usuário cadastrado com sucesso.");
+        setSuccess("Imóvel cadastrado com sucesso.");
         setIsCreated(true);
       } else {
-        setError("Email já cadastrado");
+        setError("Dados Inválidos");
       }
     }
   }
@@ -79,7 +79,7 @@ const CreateProperty = () => {
         />
         <Textarea id="description" {...description} label="Descrição" />
         {loading ? (
-          <Button value="Carregando..." disabled />
+          <Button value="Carregando..." style={{cursor: "wait"}} disabled />
         ) : (
           <Button value="Adicionar Imóvel" />
         )}

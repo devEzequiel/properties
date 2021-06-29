@@ -64,7 +64,7 @@ const EditProperty = () => {
     if (response.ok) {
       setSuccess("Imóvel atualizado com sucesso.");
     } else if (!response.ok) {
-      setError("Ocorreu um erro");
+      setError("Dados Inválidos");
     }
   }
 
@@ -105,12 +105,12 @@ const EditProperty = () => {
           />
           {success && <p className={styles.success}>{success}</p>}
 
-          {error && <p className={styles.success}>{error}</p>}
+          {error && <p className={styles.error}>Dados Inválidos</p>}
 
           {loading ? (
-            <Button value="Carregando..." disabled />
+            <Button value="Carregando..." style={{cursor: "wait"}} disabled />
           ) : (
-            <Button value="Adicionar Imóvel" />
+            <Button value="Editar Imóvel" />
           )}
         </form>
       </div>

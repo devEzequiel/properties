@@ -42,7 +42,7 @@ const LoginForm = () => {
           {...password}
         />
 
-        {loading ? <Button value="Carregando..." /> : <Button value="Entrar" />}
+        {loading ? <Button value="Carregando..." style={{cursor: "wait"}} /> : <Button value="Entrar" />}
         
         {loginError && <p className="loginError">{loginError}</p>}
         <Link to={ROUTES.SIGNUP} className="criar">

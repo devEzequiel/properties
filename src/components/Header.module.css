@@ -14,7 +14,7 @@
   align-items: center;
 }
 
-ul{
+ul {
   display: flex;
 }
 
@@ -29,8 +29,7 @@ ul{
 .login {
   color: #333;
   display: flex;
-  /* align-items: center; */
-  margin-top: auto;
+  align-items: center;
 }
 
 .login::after {
@@ -46,7 +45,7 @@ ul{
 
 .links {
   float: left;
-  color: black;
+  color: #333;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -63,4 +62,16 @@ ul{
 .active {
   background-color: rgb(35, 124, 94);
   color: white;
+}
+
+.iconStyle {
+  font-size: 25px;
+  margin: 5px 5px;
+  cursor: pointer;
+  float: left;
+  text-align: center;
+  padding: 8px;
+  line-height: 25px;
+  border-radius: 4px;
+  color: rgb(78, 78, 78);
 }

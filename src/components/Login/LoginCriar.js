@@ -80,7 +80,7 @@ const LoginCriar = () => {
           {...password}
         />
         {loading ? (
-          <Button value="Cadastrando..." disabled/>
+          <Button value="Cadastrando..." style={{cursor: "wait"}} disabled/>
         ) : (
           <Button value="Cadastrar"/>
         )}

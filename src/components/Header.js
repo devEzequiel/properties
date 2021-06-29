@@ -7,13 +7,6 @@ import { UserContext } from "../UserContext";
 const Header = () => {
   const { userLogout, user, logoutRedirect, login } = React.useContext(UserContext);
 
-  const iconStyle = {
-    fontSize: "25px",
-    margin: " 5px 5px",
-    cursor: "pointer",
-    color: "#333",
-  }
-
   //recuperar o nome do usuário logado
   // React.useEffect(() => {
   //   (user && setName(user.data.name.split(' ')));
@@ -37,10 +30,11 @@ const Header = () => {
           <Link  className={`${styles.links} active`} to="/imoveis/criar">Adicionar Imóvel</Link>
             <Link  className={styles.links} to="/imoveis/salvos">Imóveis Salvos</Link>
           
-              <i class="fas fa-sign-out-alt"
+              <i
                 value="sair"
                 onClick={() => handleLogout()}
-                style={iconStyle}
+                className={`${styles.iconStyle} fas fa-sign-out-alt`}
+                title="Fazer Logout"
               />
 
           </div>

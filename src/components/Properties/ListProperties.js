@@ -14,7 +14,8 @@ const ListProperties = () => {
   const { request } = useFetch();
   const token = window.localStorage.getItem("token");
   const [properties, setProperties] = useState(null);
-  const [pageNumber, setPageNumber] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  
   // const [saved, setSaved] = useState(null);
 
   //funções para editar o formato da moeda
@@ -35,7 +36,7 @@ const ListProperties = () => {
   //recuperar os imoveis e os imoveis salvos ao carregar a página
   React.useEffect(async () => {
     getProperties();
-    // console.log("object");
+    // let url = window.location.pathname;
   }, []);
 
   async function getProperties() {
@@ -43,9 +44,10 @@ const ListProperties = () => {
     const { response, json } = await request(url, options);
     if (response.ok) {
 
-      let foo  = new Array(json.meta.last_page)
+      // let foo  = new Array(json.meta.last_page)
+      console.table(json)
 
-      setProperties(json.data);
+      json.data && setProperties(json.data);
     } else {
       setProperties(null);
     }
@@ -112,7 +114,7 @@ const ListProperties = () => {
                 return (
                   <tr key={i}>
                     <td>{property.title} </td>
-                    <td>{property.description}</td>
+                    <td className={styles.description}>{property.description}</td>
                     <td>{getMoney(property.rental_price)}</td>
                     <td>{getMoney(property.sale_price)}</td>
                     <td>
@@ -121,6 +123,7 @@ const ListProperties = () => {
                           className="fas fa-edit"
                           id="edit"
                           style={iconStyle}
+                          title="editar"
                         />
                       </Link>{" "}
                       |{" "}
@@ -129,6 +132,7 @@ const ListProperties = () => {
                         id="save"
                         style={iconStyle}
                         onClick={handleClick(property.id)}
+                        title="salvar"
                       />{" "}
                       |{" "}
                       <i
@@ -136,6 +140,7 @@ const ListProperties = () => {
                         id="delete"
                         style={iconStyle}
                         onClick={handleClick(property.id)}
+                        title="excluir"
                       />
                     </td>
                   </tr>
@@ -148,10 +153,10 @@ const ListProperties = () => {
        (<div className={styles.pagination}>
         <a href="#">&laquo;</a>
         
-          <Link  href="#" className={styles.active}>1</Link>
-          <Link  href="#">2</Link>
-          <Link  href="#">3</Link>
-          <Link  href="#">4</Link>
+          <Link  to="#" className={styles.active}>1</Link>
+          <Link  to="#">2</Link>
+          <Link  to="#">3</Link>
+          <Link  to="#">4</Link>
         
         <a href="#">&raquo;</a>
       </div>)}

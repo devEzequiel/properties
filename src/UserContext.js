@@ -18,16 +18,15 @@ export const UserStorage = ({ children }) => {
 
   //função para fazer o logout
   const userLogout = React.useCallback(async function () {
-    const token = window.localStorage.getItem("token");
-    const { url, options } = USER_LOGOUT(token);
-    await fetch(url, options);
+    const token = window.localStorage.removeItem("token");
+    // await fetch(url, options);
+    // window.localStorage.removeItem("token");
     setUser(null);
     setError(null);
     setLoading(false);
     setLogin(false);
     setLoginRedirect(false);
     setLogoutRedirect(true);
-    window.localStorage.removeItem("token");
   }, []);
 
   //recupera os dados do user, através do envio do token

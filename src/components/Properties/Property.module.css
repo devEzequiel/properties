@@ -38,11 +38,13 @@
 }
 
 .propertyDiv td {
-  padding: 20px 0;
+  padding: 20px 3px 20px 9px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;  
 }
 
 .propertyDiv th {
-  padding: 10px 0;
+  padding: 15px 4px;
 }
 
 .tableRow {
@@ -53,13 +55,22 @@
 }
 
 .success {
-  color: hsl(135, 50%, 53%);
-  font-size: 1.2rem;
+  color: hsl(108, 100%, 55%);
+  font-size: 0.9rem;
+  /* padding: px, 0; */
+  float: right;
+}
+
+.error {
+  color: hsl(0, 96%, 51%);
+  font-size: 0.9rem;
   float: right;
 }
 
 .title {
+  color: rgb(93, 93, 93);
   margin: 80px 0 40px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 
